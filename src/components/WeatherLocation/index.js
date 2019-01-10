@@ -17,12 +17,6 @@ const data = {
   humidity: 30,
   wind: "10 m/s"
 };
-const data2 = {
-    temperature: 20,
-    weatherState: WINDY,
-    humidity: 90,
-    wind: "50 m/s"
-  };
 
 class WeatherLocation extends Component {
 
