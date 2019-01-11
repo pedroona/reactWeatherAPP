@@ -5,7 +5,8 @@ import {
   RAIN,
   SNOW,
   THUNDER,
-  DRIZZLE
+  DRIZZLE,
+  ATMOSPHERE,
 } from "../constants/weathers";
 
 const getTemp = kelvin => {
@@ -17,17 +18,18 @@ const getTemp = kelvin => {
 
 const getWeatherState = weatherData => {
   const { id } = weatherData;
-  console.log("El id del icono es: ", id);
   switch (true) {
     case id < 300:
       return THUNDER;
-    case id < 400:
+    case id < 500:
       return DRIZZLE;
     case id < 600:
       return RAIN;
     case id < 700:
       return SNOW;
     case id < 800:
+      return ATMOSPHERE;
+    case id === 800:
       return SUN;
     default:
       return CLOUD;

@@ -7,6 +7,7 @@ import {
   SNOW,
   THUNDER,
   DRIZZLE,
+  ATMOSPHERE,
 } from "../../../constants/weathers";
 import PropTypes from 'prop-types';
 import './styles.css';
@@ -17,7 +18,8 @@ const icons = {
   [RAIN]: "rain",
   [SNOW]: "snow",
   [THUNDER]: "day-thunderstorm",
-  [DRIZZLE]: "day-showers"
+  [DRIZZLE]: "day-showers",
+  [ATMOSPHERE]: "windy",
 };
 
 const getWeatherIcon = weatherState => {
