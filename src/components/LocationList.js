@@ -1,16 +1,13 @@
 import React from "react";
 import WeatherLocation from "./WeatherLocation";
+import PropTypes from "prop-types";
 
-const locationList = () => {
-  return (
-    <div>
-      <WeatherLocation city="Málaga" />
-      <WeatherLocation city="Washington,us" />
-      <WeatherLocation city="Sevilla" />
-      <WeatherLocation city="Huelva" />
-      <WeatherLocation city="Londres" />
-    </div>
-  );
+const citiesTocity = cities =>
+  cities.map((city, index) => <WeatherLocation city={city} key={index}/>);
+const locationList = ({ cities }) => <div>{citiesTocity(cities)}</div>;
+
+locationList.prototype = {
+  cities: PropTypes.array.isRequired
 };
 
 export default locationList;
