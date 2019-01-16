@@ -13,7 +13,7 @@ const getTemp = kelvin => {
   return convert(kelvin)
     .from("K")
     .to("C")
-    .toFixed(2);
+    .toFixed(0);
 };
 
 const getWeatherState = weatherData => {

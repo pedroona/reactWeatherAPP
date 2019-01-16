@@ -1,7 +1,12 @@
 import React, { Component } from "react";
+import Paper from "@material-ui/core/Paper";
+import AppBar from "@material-ui/core/AppBar";
+import Typography from "@material-ui/core/Typography";
+import Toolbar from "@material-ui/core/Toolbar";
 import { Grid, Row, Col } from "react-flexbox-grid";
 import "./App.css";
 import LocationList from "./components/LocationList";
+import ForecastExtended from "./components/ForecastExtended";
 
 const cities = [
   "Málaga,es",
@@ -18,22 +23,34 @@ class App extends Component {
   };
   render() {
     return (
-      <div className="App">
-        <Grid fluid>
-          <Row>
-            <Col xs={12} sm={6} md={4}>
-              <div className="red" />
-            </Col>
-            <Col xs={12} sm={6} md={4}>
-              <div className="blue" />
-            </Col>
-            <Col xs={12} sm={6} md={4}>
-              <div className="green" />
-            </Col>
-          </Row>
-        </Grid>
-        {/* <LocationList cities={cities} onSelectedLocation={this.handleSelectionLocation}></LocationList> */}
-      </div>
+      <Grid>
+        <Row>
+          <Col xs={12}>
+            <AppBar position="sticky">
+              <Toolbar>
+                <Typography variant="title" color="inherit">
+                  WeatherApp
+                </Typography>
+              </Toolbar>
+            </AppBar>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} md={8} lg={6}>
+            <LocationList
+              cities={cities}
+              onSelectedLocation={this.handleSelectionLocation}
+            />
+          </Col>
+          <Col xs={12} md={6}>
+            <Paper elevation={4}>
+              <div className="details">
+                <ForecastExtended city="Prueba"/>
+              </div>
+            </Paper>
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }
