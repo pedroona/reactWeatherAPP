@@ -23,17 +23,27 @@ class WeatherLocation extends Component {
   
 
   handleUpdateClick = () => {
-    const api_weather = getUrlWeatherByCity(this.state.city);
-    fetch(api_weather)
-      .then(resolve => {
-        return resolve.json();
-      })
-      .then(resolveJson => {
-        const newWeather = transformWeather(resolveJson);
-        this.setState({
-          data: newWeather
-        });
-      });
+    const data = {
+      temperature: 15,
+      weatherState: "normal",
+      humidity: 20,
+      wind: "normal"
+  }
+  this.setState({data: data})
+
+    //******* COMENTADO Y HARDCODEADO DURANTE EL BLOQUEO DE LA API *******//
+
+    // const api_weather = getUrlWeatherByCity(this.state.city);
+    // fetch(api_weather)
+    //   .then(resolve => {
+    //     return resolve.json();
+    //   })
+    //   .then(resolveJson => {
+    //     const newWeather = transformWeather(resolveJson);
+    //     this.setState({
+    //       data: newWeather
+    //     });
+    //   });
   };
   render() {
     const { onWeatherLocationClick } = this.props;

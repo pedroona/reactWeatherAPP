@@ -51,4 +51,21 @@ const transformWeather = weatherData => {
   return data;
 };
 
+export const transformWeatherForecast = weatherData => {
+  const { humidity, temp } = weatherData.main;
+  const { speed } = weatherData.wind;
+  const weatherState = getWeatherState(weatherData.weather[0]);
+  const temperature = parseFloat(getTemp(temp));
+  const time = weatherData.dt;
+
+  const data = {
+    humidity,
+    temperature,
+    weatherState,
+    wind: `${speed} m/s`,
+    time
+  };
+  return data;
+};
+
 export default transformWeather;

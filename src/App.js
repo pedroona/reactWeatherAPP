@@ -14,14 +14,23 @@ const cities = [
   "Bogotá",
   "Huelva",
   "Lisboa",
-  "Washington"
+  "Washington, us"
 ];
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      cityToExtend: null
+    };
+  }
   handleSelectionLocation = city => {
-    console.log(`handleSelectionLocation ${city}`);
+    this.setState({
+      cityToExtend: city
+    });
   };
   render() {
+    let city = this.state.cityToExtend;
     return (
       <Grid>
         <Row>
@@ -45,7 +54,11 @@ class App extends Component {
           <Col xs={12} md={6}>
             <Paper elevation={4}>
               <div className="details">
-                <ForecastExtended city="Prueba"/>
+                {city ? (
+                  <ForecastExtended city={city} />
+                ) : (
+                  null
+                )}
               </div>
             </Paper>
           </Col>

@@ -5,3 +5,10 @@
     margin-bottom: 20px;
   }
 }
+
+.forecast-title {
+  font-family: 'Roboto', sans-serif;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+}
