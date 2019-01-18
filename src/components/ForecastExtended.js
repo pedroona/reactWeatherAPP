@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import ForecastItem from "./ForecastItem";
 import { getUrlForecastByCity } from "./../services/getUrlForecastByCity";
-import { transformWeatherForecast } from "./../services/transformWeather";
+import transformForecast from "./../services/transformForecast";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import "./styles.css";
 
 const days = [
@@ -14,44 +15,64 @@ const days = [
   "Domingo"
 ];
 
-// const data = {
-//   temperature: 15,
-//   weatherState: "normal",
-//   humidity: 20,
-//   wind: "normal"
-// }
-
 class ForecastExtended extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       data: null
     };
   }
   renderForecastItemDay() {
     const { data } = this.state;
-    return days.map(day => {
-      return <ForecastItem key={day} weekDay={day} hour="12:30" data={data} />;
+    return data.map(item => {
+      return (
+        <ForecastItem
+          key={`${item.weekDay}${item.hour}`}
+          weekDay={item.weekDay}
+          hour={`${item.hour}:00`}
+          data={item.data}
+        />
+      );
     });
   }
+
+  renderProgress() {
+    return <CircularProgress />;
+  }
+
   componentDidMount() {
     const { city } = this.props;
+    this.updateCity(city);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.city != this.props.city) {
+      this.setState({
+        data: null
+      })
+      this.updateCity(nextProps.city);
+    }
+  }
+
+  updateCity = city => {
     const url_forecast = getUrlForecastByCity(city);
-    let data = [];
     fetch(url_forecast)
       .then(result => result.json())
       .then(resultJson => {
-        resultJson.list.map(result => console.log(result));
-        console.log(resultJson.list);
+        const res = transformForecast(resultJson);
+        this.setState({
+          data: res
+        });
       });
-  }
+  };
+
   render() {
     const { city } = this.props;
     const { data } = this.state;
     return (
       <div>
         <h2 className="forecast-title">Pronóstico extendido para {city}</h2>
-        {/* {(data) ? this.renderForecastItemDay() : null} */}
+        {data ? this.renderForecastItemDay() : this.renderProgress()}
       </div>
     );
   }

@@ -35,7 +35,7 @@ class App extends Component {
       <Grid>
         <Row>
           <Col xs={12}>
-            <AppBar position="sticky">
+            <AppBar className="appBar" position="sticky">
               <Toolbar>
                 <Typography variant="title" color="inherit">
                   WeatherApp
@@ -45,7 +45,7 @@ class App extends Component {
           </Col>
         </Row>
         <Row>
-          <Col xs={12} md={8} lg={6}>
+          <Col xs={12} md={6}>
             <LocationList
               cities={cities}
               onSelectedLocation={this.handleSelectionLocation}
